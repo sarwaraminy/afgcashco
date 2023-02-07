@@ -1,0 +1,30 @@
+
+
+<div class="row p-0">
+    <div class="col-12 mb-4">
+        <div class="card border-light shadow-sm components-section">
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div ng-show="false" id="psale"><!----------this part is used for printing Sale-->
+                        <div ng-include src="'modules/sell/views/component/sell_print.html'"></div>
+                    </div><!--------------------end of the print-->
+
+                    <div ng-show="showProductList" class="col-sm-6 pr-5 bg-light"><!---sell left column Start-->
+                        <div ng-include src="'modules/sell/views/component/sell_leftCol.html'"></div>
+                    </div><!------------------end of Sell left Column-->
+                    <div ng-show="showPayList" class="col-sm-6 pr-5 bg-light"><!---sell left column Start for -->
+                        <div ng-include src="'modules/sell/views/component/sell_leftColPL.html'"></div>
+                    </div><!------------------end of Sell left Column-->
+                    <div ng-show="showList" class="col-sm-6"><!------------sell right column for adding product to list and parking Start-->
+                        <div ng-include src="'modules/sell/views/component/sell_rightColCard.html'"></div>
+                    </div><!--------------End of the sell right column for product list-->
+                    <div ng-show="showPayPg" class="col-sm-6 border border-light pl-1"><!------Pay page when you click on Pay item button Start-->
+                        <div ng-include src="'modules/sell/views/component/sell_rightColPay.html'"></div>
+                    </div><!-----------------------End of the Pay page column-->
+                    <div ng-show="showColect" class="col-sm-6 border border-light pl-1"><!------Pay page when you click on Pay item button Start-->
+                        <div ng-include src="'modules/sell/views/component/sell_rightCollCollect.html'"></div>
+                    </div><!-----------------------End of the Pay page column-->
+                </div>
+            </div>
+        </div>
+</div>
