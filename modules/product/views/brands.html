@@ -1,16 +1,15 @@
-
+<!------------------ This part is used for adding new brand---------------------->
 <div class="row">
  <div class="col-12 mb-4">
   <div class="card border-0 shadow components-section">
    <div class="card-body">
    <!-- this area is for message-->
-   <div class="row mb-4">
-     <div class="col-sm-4">
-       <div ng-show="error" class="alert-link alert-success">{{message}}</div>
-     </div>
+   <div ng-switch="msgType" class="row">
+     <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+     <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
    </div>
    <form  name="addBrand" ng-submit="addnewbrand()" role="form">
-     <div class="row mb-4">
+     <div class="row mb-2">
       <!-- Form -->
       <div class="col-sm-2">
        <div class="mb-2">
@@ -24,7 +23,7 @@
       </div>
       <div class="col-sm-2">
        <div class="mb-2">
-         <button type="submit" class="btn btn-block btn-info">Add New Brand</button>
+         <button type="submit" class="btn btn-block btn-info mt-0">Add New Brand</button>
        </div>
       </div>
       <!-- End of Form -->
@@ -34,3 +33,5 @@
   </div>
  </div>
 </div>
+<!------------------ end of adding new brands---------------------->
+

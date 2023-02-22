@@ -1,1 +1,37 @@
-<h1>product_type.html page</h1>
+<!------------------ This part is used for adding new category---------------------->
+<div class="row">
+ <div class="col-12 mb-4">
+  <div class="card border-0 shadow components-section">
+   <div class="card-body">
+   <!-- this area is for message-->
+   <div ng-switch="msgType" class="row">
+     <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+     <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
+   </div>
+   <form  name="addCategory" ng-submit="addnewcategory()" role="form">
+     <div class="row mb-2">
+      <!-- Form -->
+      <div class="col-sm-2">
+       <div class="mb-2">
+         <label for="ctgname">Category Name</label>
+       </div>
+      </div>
+      <div class="col-sm-3">
+       <div class="mb-2">
+          <input type="text" ng-model="ctgname" id="ctgname" class="form-control" placeholder="Enter a Category Name" autofocus required>
+       </div>
+      </div>
+      <div class="col-sm-2">
+       <div class="mb-2">
+         <button type="submit" class="btn btn-block btn-info mt-0">Add New Category</button>
+       </div>
+      </div>
+      <!-- End of Form -->
+     </div>
+   </form>
+   </div>
+  </div>
+ </div>
+</div>
+<!------------------ end of adding new category---------------------->
+
