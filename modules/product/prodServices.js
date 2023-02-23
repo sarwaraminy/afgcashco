@@ -23,8 +23,6 @@ angular.module('Product')
 	             }
 		             callback(response);
              });
-            
-
         };
         
         // this function is used for adding new Category
@@ -43,8 +41,24 @@ angular.module('Product')
 	             }
 		             callback(response);
              });
-            
-
+        };
+        
+        // this function is used for adding new Category
+        service.Addnewproduct = function (ctgname, callback) {
+             var nprod = $http.post('addnewcategory.php', { category_name: ctgname});
+             nprod.then(function(response) {
+	             var error=response.data.error;
+	             var dbMsg = response.data.message;
+	             if(error==true){
+		             response.success=false;
+		             response.message = 'Adding new Product is failed! '+ dbMsg;
+	             }
+	             else{
+		             response.success=true;
+		             response.message = 'A new Product is added successfully! ' + ctgname;
+	             }
+		             callback(response);
+             });
         };
  
         return service;
