@@ -1,22 +1,109 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate"> 
-    <meta http-equiv="Pragma" content="no-cache">
-  </head>
-    <body>
-      <div class="page-content-wrapper">
-        <div class="container p-1 my-1 bg-light">
-          <div class="row">
-            <div class="col"><h2>Customers</h2></div>
-          </div>
-          <div class="row">
-            <div class="col">
-                <span>Manage your customers and their balances, or segment them by demographics and spending habits. Need help?</span>
-                <i class="fa fa-external-link vd-ml1 vd-icon"></i>
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow components-section">
+                        <div class="card-body">
+                            <div>
+                              <span class="text-b">Manage your customers and their balances, or segment them by demographics and spending habits. Need help? </span>
+                            </div>
+                            <!-- this area is for message-->
+                            <div ng-switch="msgType" class="row">
+                              <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+                              <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
+                            </div>
+                            <form  name="addProduct" ng-submit="addnewcustomer()" role="form">     
+                              <div class="row mb-4">
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="firstname">First Name</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                             <input type="text" class="form-control" ng-model="firstname" id="firstname" placeholder="First Name" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form --> 
+                                      <!-- Form -->                                   
+                                      <div class="mb-4">
+                                        <label for="email">Email address</label>
+                                        <div class="input-group">
+                                           <span class="input-group-text bg-light"><span class="fas fa-envelope"></span></span>
+                                           <input type="email" class="form-control" id="email" ng-model="email">
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="state">State</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-list"></span></span>
+                                              <select class="form-select" id="state" ng-model="state" required> 
+                                               <option>Please select your state</option>
+                                               <option value="NY">New York</option>
+                                               <option value="TX">Texas</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="lastname">Last Name</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                             <input type="text" class="form-control" ng-model="lastname" id="lastname" placeholder="Last Name" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form --> 
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="street">Address</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
+                                             <input type="text" class="form-control" ng-model="street" id="street" placeholder="Address/ Street" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form --> 
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="zipcode">Zip Code</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
+                                             <input type="text" class="form-control" ng-model="zipcode" id="zipcode" placeholder="Zip Code" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="pnumber">Phone #</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-phone-alt"></span></span>
+                                             <input type="text"  class="form-control" ng-model="pnumber" id="pnumber" placeholder="+93706254517" >
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="city">City</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
+                                             <input type="text" class="form-control" ng-model="city" id="city" placeholder="Enter your city name" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Customer</button>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-        </div>
-      </div>
-    </body>
-</html>

@@ -43,9 +43,9 @@ angular.module('Product')
              });
         };
         
-        // this function is used for adding new Category
-        service.Addnewproduct = function (ctgname, callback) {
-             var nprod = $http.post('addnewcategory.php', { category_name: ctgname});
+        // this function is used for adding new product
+        service.Addnewproduct = function (pname,ctgid,bid,mYear,lprice, callback) {
+             var nprod = $http.post('./modules/product/views/component/addnewproduct.php', { product_name: pname, brand_id: bid, category_id: ctgid, model_year: mYear, list_price: lprice});
              nprod.then(function(response) {
 	             var error=response.data.error;
 	             var dbMsg = response.data.message;
@@ -55,7 +55,7 @@ angular.module('Product')
 	             }
 	             else{
 		             response.success=true;
-		             response.message = 'A new Product is added successfully! ' + ctgname;
+		             response.message = 'A new Product is added successfully! ' + pname;
 	             }
 		             callback(response);
              });

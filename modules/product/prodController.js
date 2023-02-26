@@ -46,21 +46,29 @@ angular.module('Product')
             });
         };
         
+     // create the year ddl
+     var year = new Date().getFullYear()-15;
+     var range = [];
+     range.push(year);
+     for (var i=1; i<20; i++){
+	     range.push(year+i);
+     }   
+     $scope.years = range;
      //create an adding new product function to save new products
      $scope.addnewproduct = function () {
 	      //init the variables
 	       var pName, ctgID, bID, mYear, lprice;
 	        pName=angular.element(document.getElementById("productname"));
-	        ctgID=angular.element(document.getElementById("productname"));
-	        bID=angular.element(document.getElementById("productname"));
-	        mYear=angular.element(document.getElementById("productname"));
-	        lprice=angular.element(document.getElementById("productname"));
+	        ctgID=angular.element(document.getElementById("category"));
+	        bID=angular.element(document.getElementById("brand"));
+	        mYear=angular.element(document.getElementById("myear"));
+	        lprice=angular.element(document.getElementById("listprice"));
 	        $scope.productname = pName.val();
-	        $scope.productname = ctgID.val();
-	        $scope.productname = bID.val();
-	        $scope.productname = mYear.val();
-	        $scope.productname = lprice.val();
-            ProdService.Addnewproduct($scope.productname,function(response) {
+	        $scope.ctgID = ctgID.val();
+	        $scope.brandID = bID.val();
+	        $scope.modelYear = mYear.val();
+	        $scope.listPrice = lprice.val();
+            ProdService.Addnewproduct($scope.productname,$scope.ctgID,$scope.brandID,$scope.modelYear,$scope.listPrice,function(response) {
 	            if(response.success){
 		            $scope.msgType="1";
                     $scope.message = response.message;

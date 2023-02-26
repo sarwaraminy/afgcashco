@@ -16,41 +16,44 @@
                                           <label for="productname">Product Name</label>
                                           <input type="text" class="form-control" ng-model="productname" id="productname" required>
                                       </div>
-                                      <!-- End of Form -->
-                                      <!-- Form -->
-                                      <div class="mb-4">
-                                          <label class="my-1 me-2" for="brand">Brands</label>
-                                          <select class="form-select" ng-model="brand" id="category" required> 
-                                            <option ng-repeat="brand in brands" value="{{brand.BRAND_ID}}">{{brand.BRAND_NAME}}</option>
-                                          </select>
-                                      </div>
-                                      <!-- End of Form -->
-                                  </div>
-                                  <div class="col-lg-4 col-sm-6">
-                                      <!-- Form -->
-                                      <div class="mb-4">
-                                          <label class="my-1 me-2" for="category">Categories</label>
-                                          <select class="form-select" ng-model="ctg" id="category" required> 
-                                            <option ng-repeat="ctg in categories" value="{{ctg.CATEGORY_ID}}">{{ctg.CATEGORY_NAME}}</option>
-                                          </select>
-                                      </div>
-                                      <!-- End of Form -->
+                                      <!-- End of Form -->                                    
                                       <!-- Form -->
                                       <div class="mb-3">
                                           <label for="myear">Model Year</label>
                                           <div class="input-group">
                                               <span class="input-group-text bg-light"><span class="fas fa-calendar"></span></span>
-                                              <input ng-model="datepicker" class="form-control" id="datepicker" type="date" placeholder="yyyy" required>                                               
+                                              <select class="form-select" id="myear" ng-model="myear" required> 
+                                               <option>Select a model year</option>
+                                               <option ng-repeat="year in years">{{year}}</option>
+                                              </select>                                              
                                           </div>
                                       </div>
                                       <!-- End of Form -->
+                                  </div>
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label class="my-1 me-2" for="brand">Brands</label>
+                                          <select class="form-select" ng-model="brand" id="brand" required> 
+                                            <option ng-repeat="brand in brands" value="{{brand.BRAND_ID}}">{{brand.BRAND_NAME}}({{brand.BRAND_ID}})</option>
+                                          </select>
+                                      </div>
+                                      <!-- End of Form --> 
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="productname">List of Price</label>
+                                          <input type="number" step=".01" class="form-control" ng-model="listprice" id="listprice" placeholder="Enter list of price" required>
+                                      </div>
+                                      <!-- End of Form --> 
                                   </div>
                                   
                                   <div class="col-lg-4 col-sm-6">
                                       <!-- Form -->
                                       <div class="mb-4">
-                                          <label for="productname">List of Price</label>
-                                          <input type="number" step=".01" class="form-control" ng-model="listprice" id="listprice" placeholder="Enter list of price" required>
+                                          <label class="my-1 me-2" for="category">Categories</label>
+                                          <select class="form-select" ng-model="category" id="category" required> 
+                                            <option ng-repeat="ctg in categories" value="{{ctg.CATEGORY_ID}}">{{ctg.CATEGORY_NAME}}({{ctg.CATEGORY_ID}})</option>
+                                          </select>
                                       </div>
                                       <!-- End of Form -->
                                       <!-- Form -->
