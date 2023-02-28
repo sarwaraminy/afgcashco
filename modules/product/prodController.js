@@ -29,6 +29,16 @@ angular.module('Product')
           .then( function(response) {
           $scope.categories = response.data;
       });
+     // get the list of products
+     $http.get("./modules/product/views/component/getproducts.php")
+          .then( function(response) {
+          $scope.products = response.data;
+      });
+     // get the list of Stores
+     $http.get("./modules/product/views/component/getstores.php")
+          .then( function(response) {
+          $scope.stores = response.data;
+      });
         
      //create an adding new Category function to save new categories
      $scope.addnewcategory = function () {
@@ -69,6 +79,28 @@ angular.module('Product')
 	        $scope.modelYear = mYear.val();
 	        $scope.listPrice = lprice.val();
             ProdService.Addnewproduct($scope.productname,$scope.ctgID,$scope.brandID,$scope.modelYear,$scope.listPrice,function(response) {
+	            if(response.success){
+		            $scope.msgType="1";
+                    $scope.message = response.message;
+	            }
+	            else {
+		            $scope.msgType="0";
+                    $scope.message = response.message;
+	            }
+            });
+        };
+        
+     //create an adding new stock function to save new stocks
+     $scope.addnewstock = function () {
+	      //init the variables
+	       var storid, prodid, qty;
+	        storid=angular.element(document.getElementById("storeid"));
+	        $scope.strid = storid.val();
+	        prodid=angular.element(document.getElementById("productid"));
+	        $scope.prdid = prodid.val();
+	        qty=angular.element(document.getElementById("quantity"));
+	        $scope.quantity = qty.val();
+            ProdService.Addnewstock($scope.strid,$scope.prdid,$scope.quantity, function(response) {
 	            if(response.success){
 		            $scope.msgType="1";
                     $scope.message = response.message;

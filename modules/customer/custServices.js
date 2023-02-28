@@ -14,11 +14,11 @@ angular.module('Customer')
 	             var dbMsg = response.data.message;
 	             if(error==true){
 		             response.success=false;
-		             response.message = 'Adding new Product is failed! '+ dbMsg;
+		             response.message = 'Adding new Customer is failed! '+ dbMsg;
 	             }
 	             else{
 		             response.success=true;
-		             response.message = 'A new Product is added successfully! ' + email;
+		             response.message = 'A new Customer is added successfully! ' + email;
 	             }
 		             callback(response);
              });

@@ -1,1 +1,52 @@
-<h1>stock_cntrl.html page</h1>
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow components-section">
+                        <div class="card-body">
+                            <!-- this area is for message-->
+                            <div ng-switch="msgType" class="row">
+                              <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+                              <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
+                            </div>
+                            <form  name="addProduct" ng-submit="addnewstock()" role="form">     
+                              <div class="row mb-4">
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label class="my-1 me-2" for="storeid">Stores</label>
+                                          <select class="form-select" ng-model="storeid" id="storeid" required> 
+                                            <option ng-repeat="store in stores" value="{{store.store_id}}">{{store.store_name}}({{store.store_id}})</option>
+                                          </select>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label class="my-1 me-2" for="productid">Products Name</label>
+                                          <select class="form-select" ng-model="productid" id="productid" required> 
+                                            <option ng-repeat="prod in products" value="{{prod.product_id}}">{{prod.product_name}}({{prod.product_id}})</option>
+                                          </select>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="quantity">Quantity</label>
+                                          <input type="number" step=".01" class="form-control" ng-model="quantity" id="quantity" placeholder="Quantity" required>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Stock</button>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>

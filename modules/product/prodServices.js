@@ -60,6 +60,24 @@ angular.module('Product')
 		             callback(response);
              });
         };
+        
+        // this function is used for adding new Stock
+        service.Addnewstock = function (storeid,prodid,qty, callback) {
+             var nprod = $http.post('./modules/product/views/component/addnewstock.php', { store_id: storeid, product_id: prodid, quantity: qty});
+             nprod.then(function(response) {
+	             var error=response.data.error;
+	             var dbMsg = response.data.message;
+	             if(error==true){
+		             response.success=false;
+		             response.message = 'Adding new Stock is failed! '+ dbMsg;
+	             }
+	             else{
+		             response.success=true;
+		             response.message = 'A new Stock is added successfully! ' + storeid;
+	             }
+		             callback(response);
+             });
+        };
  
         return service;
     }])

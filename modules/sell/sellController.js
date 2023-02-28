@@ -1,7 +1,31 @@
 'use strict';
-var sell_module = angular.module('Sell', ['ngAnimate', 'ui.bootstrap']);
-sell_module.controller('sellCtrl', ['$scope', '$sce', '$http','$cookies', '$uibModal', '$log', '$route', '$location',
-    function ($scope, $sce, $http, $cookies, $uibModal, $log, $route, $location){
+angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
+.service('SellService', ['$http', function ($http) {
+	var service = {};
+        
+        // this function is used for adding new store
+        service.Addnewstore = function (storename, phone, email, address, city, state, zipcode, callback) {
+             var nprod = $http.post('./modules/sell/views/component/addnewstore.php', {store_name:storename, phone:phone,  email:email, street:address, city:city, state:state, zip_code:zipcode });
+             nprod.then(function(response) {
+	             var error=response.data.error;
+	             var dbMsg = response.data.message;
+	             if(error==true){
+		             response.success=false;
+		             response.message = 'Adding new store is failed! '+ dbMsg;
+	             }
+	             else{
+		             response.success=true;
+		             response.message = 'A new store is added successfully! ' + email;
+	             }
+		             callback(response);
+             });
+        };
+ 
+        return service;
+	}])
+	
+.controller('sellCtrl', ['$scope', '$sce', '$http','$cookies', '$uibModal', '$log', '$route', '$location', 'SellService',
+    function ($scope, $sce, $http, $cookies, $uibModal, $log, $route, $location, SellService){
         $scope.rTrue = false; //don't show the Sale parked untill clcik on Retrieve Sale
         $scope.currency = '$';
         $scope.dcount = 0;
@@ -17,6 +41,39 @@ sell_module.controller('sellCtrl', ['$scope', '$sce', '$http','$cookies', '$uibM
           $route.reload();// reload the sale page
         };
         //=========================================================================
+        
+        //=========================================================================
+        //create an adding new store function to save new stores
+        $scope.addnewstore = function () {
+	         //init the variables
+	          var sname,pNo,eml,addr,cty,sta,zcode;
+	           sname=angular.element(document.getElementById("storename"));
+	           $scope.storename = sname.val();
+	           pNo=angular.element(document.getElementById("pnumber"));
+	           $scope.phone = pNo.val();
+	           eml=angular.element(document.getElementById("email"));
+	           $scope.email = eml.val();
+	           addr=angular.element(document.getElementById("street"));
+	           $scope.address = addr.val();
+	           cty=angular.element(document.getElementById("city"));
+	           $scope.city = cty.val();
+	           sta=angular.element(document.getElementById("state"));
+	           $scope.state = sta.val();
+	           zcode=angular.element(document.getElementById("zipcode"));
+	           $scope.zipcode = zcode.val();
+               SellService.Addnewstore($scope.storename,$scope.phone,$scope.email,$scope.address,$scope.city,$scope.state,$scope.zipcode,function(response) {
+	               if(response.success){
+	   	            $scope.msgType="1";
+                       $scope.message = response.message;
+	               }
+	               else {
+	   	            $scope.msgType="0";
+                       $scope.message = response.message;
+	               }
+            });
+        };
+        //=========================================================================
+        
 
         //-------------------------------------------------------------------------
         // this function used for setting Quote
