@@ -1,31 +1,7 @@
 'use strict';
-angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
-.service('SellService', ['$http', function ($http) {
-	var service = {};
-        
-        // this function is used for adding new store
-        service.Addnewstore = function (storename, phone, email, address, city, state, zipcode, callback) {
-             var nprod = $http.post('./modules/sell/views/component/addnewstore.php', {store_name:storename, phone:phone,  email:email, street:address, city:city, state:state, zip_code:zipcode });
-             nprod.then(function(response) {
-	             var error=response.data.error;
-	             var dbMsg = response.data.message;
-	             if(error==true){
-		             response.success=false;
-		             response.message = 'Adding new store is failed! '+ dbMsg;
-	             }
-	             else{
-		             response.success=true;
-		             response.message = 'A new store is added successfully! ' + email;
-	             }
-		             callback(response);
-             });
-        };
- 
-        return service;
-	}])
-	
-.controller('sellCtrl', ['$scope', '$sce', '$http','$cookies', '$uibModal', '$log', '$route', '$location', 'SellService',
-    function ($scope, $sce, $http, $cookies, $uibModal, $log, $route, $location, SellService){
+angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])	
+.controller('sellCtrl', ['$scope', '$sce', '$http','$cookies', '$uibModal', '$log', '$route', '$location',
+    function ($scope, $sce, $http, $cookies, $uibModal, $log, $route, $location){
         $scope.rTrue = false; //don't show the Sale parked untill clcik on Retrieve Sale
         $scope.currency = '$';
         $scope.dcount = 0;
@@ -41,6 +17,24 @@ angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
           $route.reload();// reload the sale page
         };
         //=========================================================================
+        
+        // get the list of Stores
+        $http.get("./modules/product/views/component/getstores.php")
+             .then( function(response) {
+             $scope.stores = response.data;
+        });
+        
+        // get the list of Staffs
+        $http.get("./modules/sell/views/component/getstaffs.php")
+             .then( function(response) {
+             $scope.staffs = response.data;
+        });
+        
+        // get the list of Customers
+        $http.get("./modules/sell/views/component/getcustomers.php")
+             .then( function(response) {
+             $scope.customers = response.data;
+        });
         
         //=========================================================================
         //create an adding new store function to save new stores
@@ -61,7 +55,19 @@ angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
 	           $scope.state = sta.val();
 	           zcode=angular.element(document.getElementById("zipcode"));
 	           $scope.zipcode = zcode.val();
-               SellService.Addnewstore($scope.storename,$scope.phone,$scope.email,$scope.address,$scope.city,$scope.state,$scope.zipcode,function(response) {
+	           //insert records to table.
+	           var nprod = $http.post('./modules/sell/views/component/addnewstore.php', {store_name:$scope.storename, phone:$scope.phone,  email:$scope.email, street:$scope.address, city:$scope.city, state:$scope.state, zip_code:$scope.zipcode });
+                   nprod.then(function(response) {
+	                   var error=response.data.error;
+	                   var dbMsg = response.data.message;
+	                   if(error==true){
+		                   response.success=false;
+		                   response.message = 'Adding new store is failed! '+ dbMsg;
+	                   }
+	                   else{
+		                   response.success=true;
+		                   response.message = 'A new store is added successfully! ' + $scope.email;
+	                   }
 	               if(response.success){
 	   	            $scope.msgType="1";
                        $scope.message = response.message;
@@ -70,7 +76,98 @@ angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
 	   	            $scope.msgType="0";
                        $scope.message = response.message;
 	               }
-            });
+                   });
+	           
+        };
+        //=========================================================================
+        
+        //=========================================================================
+        //create an adding new staff function to save new staff
+        $scope.addnewstaff = function () {
+	         //init the variables
+	          var fname,lname,eml,pNo,act,stor,mgr;
+	           fname=angular.element(document.getElementById("firstname"));
+	           $scope.firstname = fname.val();
+	           lname=angular.element(document.getElementById("lastname"));
+	           $scope.lastname = lname.val();
+	           eml=angular.element(document.getElementById("email"));
+	           $scope.email = eml.val();	           
+	           pNo=angular.element(document.getElementById("pnumber"));
+	           $scope.phone = pNo.val();
+	           act=angular.element(document.getElementById("active"));
+	           $scope.active = act.val();
+	           stor=angular.element(document.getElementById("storeid"));
+	           $scope.storeid = stor.val();
+	           mgr=angular.element(document.getElementById("managerid"));
+	           $scope.managerid = mgr.val();
+	           //insert records to table.
+	           var nprod = $http.post('./modules/sell/views/component/addnewstaff.php', {first_name:$scope.firstname,last_name:$scope.lastname,  email:$scope.email, phone:$scope.phone, active:$scope.active, store_id:$scope.storeid, manager_id:$scope.managerid });
+                   nprod.then(function(response) {
+	                   var error=response.data.error;
+	                   var dbMsg = response.data.message;
+	                   if(error==true){
+		                   response.success=false;
+		                   response.message = 'Adding new staff is failed! '+ dbMsg;
+	                   }
+	                   else{
+		                   response.success=true;
+		                   response.message = 'A new staff is added successfully! ' + $scope.email;
+	                   }
+	               if(response.success){
+	   	            $scope.msgType="1";
+                       $scope.message = response.message;
+	               }
+	               else {
+	   	            $scope.msgType="0";
+                       $scope.message = response.message;
+	               }
+                   });
+	           
+        };
+        //=========================================================================
+        
+        //=========================================================================
+        //create an adding new order function to save new order
+        $scope.addneworder = function () {
+	         //init the variables
+	          var cstid, ostat, odate, rdate, sdate, stor,mgr;
+	           cstid=angular.element(document.getElementById("customerid"));
+	           $scope.customerid = cstid.val();
+	           ostat=angular.element(document.getElementById("orderstatus"));
+	           $scope.ostatus = ostat.val();
+	           odate=angular.element(document.getElementById("odate"));
+	           $scope.odate = odate.val();	           
+	           rdate=angular.element(document.getElementById("rdate"));
+	           $scope.rdate = rdate.val();
+	           sdate=angular.element(document.getElementById("sdate"));
+	           $scope.sdate = sdate.val();
+	           stor=angular.element(document.getElementById("storeid"));
+	           $scope.storeid = stor.val();
+	           mgr=angular.element(document.getElementById("staffid"));
+	           $scope.staffid = mgr.val();
+	           //insert records to table.
+	           var nprod = $http.post('./modules/sell/views/component/addneworder.php', {customer_id:$scope.customerid,order_status:$scope.ostatus,  order_date:$scope.odate, required_date:$scope.rdate, shipped_date:$scope.sdate, store_id:$scope.storeid, staff_id:$scope.staffid });
+                   nprod.then(function(response) {
+	                   var error=response.data.error;
+	                   var dbMsg = response.data.message;
+	                   if(error==true){
+		                   response.success=false;
+		                   response.message = 'Adding new order is failed! '+ dbMsg;
+	                   }
+	                   else{
+		                   response.success=true;
+		                   response.message = 'A new order is added successfully! ' + $scope.email;
+	                   }
+	               if(response.success){
+	   	            $scope.msgType="1";
+                       $scope.message = response.message;
+	               }
+	               else {
+	   	            $scope.msgType="0";
+                       $scope.message = response.message;
+	               }
+                   });
+	           
         };
         //=========================================================================
         

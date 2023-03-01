@@ -1,0 +1,109 @@
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow components-section">
+                        <div class="card-body">
+                            <!-- this area is for message-->
+                            <div ng-switch="msgType" class="row">
+                              <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+                              <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
+                            </div>
+                            <form  name="addStore" ng-submit="addneworder()" role="form">     
+                              <div class="row mb-4">
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="customerid">Customers</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                              <select class="form-select" id="customerid" ng-model="customerid">
+                                               <option value="">Please select a customer</option>
+                                               <option ng-repeat="cstmr in customers" value="{{cstmr.customer_id}}">{{cstmr.first_name}}</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->                                   
+                                      <div class="mb-4">
+                                        <label for="rdate">Required Date</label>
+                                        <div class="input-group">
+                                           <span class="input-group-text bg-light"><span class="fas fa-calendar"></span></span>
+                                           <input data-datepicker="" class="form-control" ng-model="rdate" id="rdate" type="date" placeholder="Required Date" required> 
+                                        </div>
+                                      </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="staffid">Staffs</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                              <select class="form-select" id="staffid" ng-model="staffid">
+                                               <option value="">Please select a manager</option>
+                                               <option ng-repeat="mgr in staffs" value="{{mgr.staff_id}}">{{mgr.first_name}}</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <!--------------------second column--------------------->
+                                  <div class="col-lg-4 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="orderstatus">Order Status</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-product-hunt"></span></span>
+                                              <select class="form-select" id="orderstatus" ng-model="orderstatus" required>
+                                               <option value=" " selected>Please select the status of order</option>
+                                               <option value="1">Shipped</option>
+                                               <option value="2">Cancelled</option>
+                                               <option value="3">Pending</option>
+                                               <option value="4">Completed</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->                                   
+                                      <div class="mb-4">
+                                        <label for="sdate">Shipped Date</label>
+                                        <div class="input-group">
+                                           <span class="input-group-text bg-light"><span class="fas fa-calendar"></span></span>
+                                           <input data-datepicker="" class="form-control" ng-model="sdate" id="sdate" type="date" placeholder="Shipped Date" required> 
+                                        </div>
+                                      </div>
+                                    <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Order</button>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <!--------------------3rd column--------------------->
+                                  <div class="col-lg-4 col-sm-6"> 
+                                      <!-- Form -->                                   
+                                      <div class="mb-4">
+                                        <label for="odate">Order Date</label>
+                                        <div class="input-group">
+                                           <span class="input-group-text bg-light"><span class="fas fa-calendar"></span></span>
+                                           <input data-datepicker="" class="form-control" ng-model="odate" id="odate" type="date" placeholder="Order Date" required> 
+                                        </div>
+                                      </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                      <div class="mb-4">
+                                          <label class="my-1 me-2" for="storeid">Stores</label>
+                                          <div class="input-group">
+                                             <span class="input-group-text bg-light"><span class="fas fa-store"></span></span>
+                                             <select class="form-select" ng-model="storeid" id="storeid" required> 
+                                               <option value=" " selected>Please select the store</option>
+                                               <option ng-repeat="store in stores" value="{{store.store_id}}">{{store.store_name}}({{store.store_id}})</option>
+                                             </select>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>

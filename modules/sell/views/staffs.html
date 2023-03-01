@@ -8,38 +8,18 @@
                               <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
                               <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
                             </div>
-                            <form  name="addStore" ng-submit="addnewstore()" role="form">     
+                            <form  name="addStore" ng-submit="addnewstaff()" role="form">     
                               <div class="row mb-4">
                                   <div class="col-lg-4 col-sm-6">
                                       <!-- Form -->
                                       <div class="mb-4">
-                                          <label for="storename">Store Name</label>
+                                          <label for="firstname">First Name</label>
                                           <div class="input-group">
-                                             <span class="input-group-text bg-light"><span class="fas fa-store"></span></span>
-                                             <input type="text" class="form-control" ng-model="storename" id="storename" placeholder="Store Name" required>
+                                             <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                             <input type="text" class="form-control" ng-model="firstname" id="firstname" placeholder="First Name" required>
                                           </div>
                                       </div>
                                       <!-- End of Form -->
-                                      <!-- Form -->
-                                      <div class="mb-4">
-                                          <label for="street">Address</label>
-                                          <div class="input-group">
-                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
-                                             <input type="text" class="form-control" ng-model="street" id="street" placeholder="Address/ Street" required>
-                                          </div>
-                                      </div>
-                                      <!-- End of Form -->
-                                      <!-- Form -->
-                                      <div class="mb-4">
-                                          <label for="zipcode">Zip Code</label>
-                                          <div class="input-group">
-                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
-                                             <input type="text" class="form-control" ng-model="zipcode" id="zipcode" placeholder="Zip Code" required>
-                                          </div>
-                                      </div>
-                                      <!-- End of Form -->
-                                  </div>
-                                  <div class="col-lg-4 col-sm-6">
                                       <!-- Form -->
                                       <div class="mb-4">
                                           <label for="pnumber">Phone #</label>
@@ -48,23 +28,51 @@
                                              <input type="text"  class="form-control" ng-model="pnumber" id="pnumber" placeholder="+93706254517" >
                                           </div>
                                       </div>
-                                      <!-- End of Form --> 
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="managerid">Managers</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                              <select class="form-select" id="managerid" ng-model="managerid">
+                                               <option value="">Please select a manager</option>
+                                               <option ng-repeat="mgr in staffs" value="{{mgr.staff_id}}">{{mgr.first_name}}</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <!--------------------second column--------------------->
+                                  <div class="col-lg-4 col-sm-6">
                                       <!-- Form -->
                                       <div class="mb-4">
-                                          <label for="city">City</label>
+                                          <label for="lastname">Last Name</label>
                                           <div class="input-group">
-                                             <span class="input-group-text bg-light"><span class="fas fa-home"></span></span>
-                                             <input type="text" class="form-control" ng-model="city" id="city" placeholder="Enter your city name" required>
+                                             <span class="input-group-text bg-light"><span class="fas fa-user"></span></span>
+                                             <input type="text" class="form-control" ng-model="lastname" id="lastname" placeholder="Last Name" required>
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="active">Active</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-list"></span></span>
+                                              <select class="form-select" id="active" ng-model="active" required>
+                                               <option value=" " selected>Please select the status</option>
+                                               <option value="1">Yes</option>
+                                               <option value="0">No</option>
+                                              </select>                                              
                                           </div>
                                       </div>
                                       <!-- End of Form -->
                                       <!-- Form -->
                                       <div class="mb-4">
-                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Store</button>
+                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Staff</button>
                                       </div>
                                       <!-- End of Form -->
                                   </div>
-                                  
+                                  <!--------------------3rd column--------------------->
                                   <div class="col-lg-4 col-sm-6"> 
                                       <!-- Form -->                                   
                                       <div class="mb-4">
@@ -76,15 +84,14 @@
                                     </div>
                                     <!-- End of Form -->
                                     <!-- Form -->
-                                      <div class="mb-3">
-                                          <label for="state">State</label>
+                                      <div class="mb-4">
+                                          <label class="my-1 me-2" for="storeid">Stores</label>
                                           <div class="input-group">
-                                              <span class="input-group-text bg-light"><span class="fas fa-list"></span></span>
-                                              <select class="form-select" id="state" ng-model="state" required> 
-                                               <option>Please select your state</option>
-                                               <option value="NY">New York</option>
-                                               <option value="TX">Texas</option>
-                                              </select>                                              
+                                             <span class="input-group-text bg-light"><span class="fas fa-store"></span></span>
+                                             <select class="form-select" ng-model="storeid" id="storeid" required> 
+                                               <option value=" " selected>Please select the store</option>
+                                               <option ng-repeat="store in stores" value="{{store.store_id}}">{{store.store_name}}({{store.store_id}})</option>
+                                             </select>
                                           </div>
                                       </div>
                                       <!-- End of Form -->
