@@ -1,0 +1,78 @@
+
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <div class="card border-0 shadow components-section">
+                        <div class="card-header bg-light">
+                             <div class="row">
+                                 <div class="col-md-6"><h2 class="h5 mb-2">Add an order item </h2></div>
+                                 <div class="col-md-6"><button class="btn p-2 bg-light position-absolute top-0 right-0" type="button" ng-click="cancel()"><span>x</span></button></div>
+                             </div>
+                        </div>
+                        <div class="card-body">
+                            <!-- this area is for message-->
+                            <div ng-switch="msgType" class="row">
+                              <div class="mb-4 text-success fw-bolder" ng-switch-when="1">{{message}}</div>
+                              <div class="mb-4 text-danger fw-bolder" ng-switch-when="0">{{message}}</div>
+                            </div>
+                            <form  name="addOrderItems" ng-submit="addneworderitems()" role="form">     
+                              <div class="row mb-4">
+                                  <div class="col-lg-6 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="ordersid">Orders</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-box-open"></span></span>
+                                              <select class="form-select" id="ordersid" ng-model="ordersid" required>
+                                               <option value="">Please select an order</option>
+                                               <option ng-repeat="ordr in orders" value="{{ordr.order_id}}"> Order #{{ordr.order_id}}</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4" ng-repeat="qty in olistprice">
+                                          <label for="quantity">Quantity</label>
+                                          <input type="text" class="form-control" ng-model="qty.quantity" value="{{qty}}" id="quantity" required>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <label for="discount">Discount</label>
+                                          <input type="number" step=".01" class="form-control" ng-model="discount" id="discount" placeholder="Discount" required>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <!--------------------second column--------------------->
+                                  <div class="col-lg-6 col-sm-6">
+                                      <!-- Form -->
+                                      <div class="mb-3">
+                                          <label for="productid">Products</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text bg-light"><span class="fas fa-box-open"></span></span>
+                                              <select class="form-select" ng-model="selproduct" ng-change="bindLPQ(selproduct)" id="productid" required>
+                                               <option value="">Please select a product</option>
+                                               <option ng-repeat="prod in products" value="{{prod.product_id}}">{{prod.product_name}}({{prod.product_id}})</option>
+                                              </select>                                              
+                                          </div>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4" ng-repeat="lstp in olistprice">
+                                          <label for="productname">List of Price </label>
+                                          <input type="text" class="form-control" ng-model="lstp.list_price" value="{{lstp}}" id="ord_listprice" required>
+                                      </div>
+                                      <!-- End of Form -->
+                                      <!-- Form -->
+                                      <div class="mb-4">
+                                          <button type="submit" class="btn btn-block btn-info mt-5">Add New Order</button>
+                                      </div>
+                                      <!-- End of Form -->
+                                  </div>
+                                  <!--------------------3rd column--------------------->
+                                 
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>

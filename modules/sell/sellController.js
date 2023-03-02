@@ -36,6 +36,28 @@ angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
              $scope.customers = response.data;
         });
         
+        // get the list of orders
+        $http.get("./modules/sell/views/component/getorders.php")
+             .then( function(response) {
+             $scope.orders = response.data;
+        });
+        
+        // get the list of products
+        $http.get("./modules/product/views/component/getproducts.php")
+             .then( function(response) {
+             $scope.products = response.data;
+        });
+        
+        //+++++++++++++ on order items page the select product change the list price and quantity
+        $scope.bindLPQ = function(selItem){
+	        // get the product and stock based on selected product
+	        $http.post("./modules/product/views/component/getproducts.php", {tags:'get1P', product_id:selItem})
+             .then( function(response) {
+             $scope.olistprice = response.data;
+            });
+        }
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
         //=========================================================================
         //create an adding new store function to save new stores
         $scope.addnewstore = function () {
@@ -432,6 +454,16 @@ angular.module('Sell', ['ngAnimate', 'ui.bootstrap'])
           templateUrl: './modules/sell/views/component/sell_QuotSaleModal.html',
           scope: $scope,
           size: 'sm-6'
+        });
+      };
+      //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      
+      //++++++++++++++++++++++show the order item list modol+++++++++++++++++++++++++++++
+      $scope.showOrdItem = function () {
+        $scope.modalInstance = $uibModal.open ({
+          templateUrl: './modules/sell/views/order_items.html',
+          scope: $scope,
+          size: 'lg'
         });
       };
       //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
